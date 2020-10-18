@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -85,6 +86,8 @@ public class Calculator {
             aButtons[i].setHorizontalTextPosition(SwingConstants.CENTER);
             aButtons[i].setBorder(compound);
             aButtons[i].setForeground(c);
+            aButtons[i].setIcon(btn1);
+            aButtons[i].setRolloverIcon(btn1_pressed);
 
             panel2.add(aButtons[i]);
         }
@@ -128,4 +131,6 @@ public class Calculator {
     private JLabel labResult = new JLabel("Txt2");
     JButton aButtons[] = new JButton[10];
     Color c = new Color(hex("0C1332"));
+    private ImageIcon btn1 = new ImageIcon("src/Images/btn1.png");
+    private ImageIcon btn1_pressed = new ImageIcon("src/Images/btn1_pressed.png");
 }
