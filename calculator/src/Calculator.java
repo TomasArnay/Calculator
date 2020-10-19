@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,12 +16,12 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-public class Calculator {
-    public void start(){
+public class Calculator implements ActionListener {
+    public void start() {
         setFrame();
     }
 
-    public void setFrame(){ 
+    public void setFrame() {
         CenterFrame cf = new CenterFrame();
         Dimension resolution = cf.center();
         int width = resolution.width;
@@ -27,7 +29,7 @@ public class Calculator {
 
         frame.add(panel);
         frame.add(panel2);
-        frame.setBounds(width/2 - 150, height/2 - 150, 320, 450);
+        frame.setBounds(width / 2 - 150, height / 2 - 150, 320, 450);
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -35,7 +37,7 @@ public class Calculator {
         setPanel();
     }
 
-    public void setPanel(){
+    public void setPanel() {
         Color colorFrame = new Color(hex("f4fdfb"));
         Color colorFrame2 = new Color(hex("ffffff"));
 
@@ -54,83 +56,148 @@ public class Calculator {
         assignValue();
     }
 
-    public void setLabels(){
-        //Size of labels
+    public void setLabels() {
+        // Size of labels
         labOperation.setBounds(0, 20, 290, 20);
         labResult.setBounds(0, 60, 290, 30);
-        
-        //Text of labels
+
+        // Text of labels
         labOperation.setFont(new Font("Arial", Font.PLAIN, 20));
         labOperation.setHorizontalAlignment(SwingConstants.RIGHT);
 
         labResult.setFont(new Font("Arial", Font.PLAIN, 40));
         labResult.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        //Font color of label
+        // Font color of label
         labOperation.setForeground(c);
         labResult.setForeground(c);
     }
 
-    public void createButtons(){
+    public void createButtons() {
         String name = "Button";
+        String special = "Special";
         Border line = new LineBorder(Color.WHITE);
-		Border margin = new EmptyBorder(5, 15, 5, 15);
+        Border margin = new EmptyBorder(5, 15, 5, 15);
         Border compound = new CompoundBorder(line, margin);
-        
-        for(int i = 0; i < 10; i++){
+
+        for (int i = 0; i < 10; i++) {
             String number = String.valueOf(i);
 
-            aButtons[i] = new JButton();
-            aButtons[i].setName(name + number);
-            aButtons[i].setFont(new Font("Arial", Font.PLAIN, 30));
-            aButtons[i].setHorizontalTextPosition(SwingConstants.CENTER);
-            aButtons[i].setBorder(compound);
-            aButtons[i].setForeground(c);
-            aButtons[i].setIcon(btn1);
-            aButtons[i].setRolloverIcon(btn1_pressed);
+            aNumbers[i] = new JButton();
+            aNumbers[i].setName(name + number);
+            aNumbers[i].setFont(new Font("Arial", Font.PLAIN, 30));
+            aNumbers[i].setHorizontalTextPosition(SwingConstants.CENTER);
+            aNumbers[i].setBorder(compound);
+            aNumbers[i].setForeground(c);
+            aNumbers[i].setIcon(btn1);
+            aNumbers[i].setRolloverIcon(btn1_pressed);
+            aNumbers[i].setText(number);
+            aNumbers[i].addActionListener(this);
 
-            panel2.add(aButtons[i]);
+            panel2.add(aNumbers[i]);
+        }
+
+        for (int i = 0; i < 6; i++) {
+            String number = String.valueOf(i);
+
+            aSigns[i] = new JButton();
+            aSigns[i].setName(special + number);
+            aSigns[i].setFont(new Font("Arial", Font.PLAIN, 30));
+            aSigns[i].setHorizontalTextPosition(SwingConstants.CENTER);
+            aSigns[i].setBorder(compound);
+            aSigns[i].setForeground(c);
+            aSigns[i].setIcon(btn_special);
+            aSigns[i].setRolloverIcon(btn1_pressed);
+            aSigns[i].addActionListener(this);
+
+            panel2.add(aSigns[i]);
         }
     }
 
-    public void assignSize(){
-        aButtons[0].setBounds(87, 355, 50, 50);
-        aButtons[1].setBounds(7, 270, 50, 50);
-        aButtons[2].setBounds(87, 270, 50, 50);
-        aButtons[3].setBounds(167, 270, 50, 50);
-        aButtons[4].setBounds(7, 185, 50, 50);
-        aButtons[5].setBounds(87, 185, 50, 50);
-        aButtons[6].setBounds(167, 185, 50, 50);
-        aButtons[7].setBounds(7, 100, 50, 50);
-        aButtons[8].setBounds(87, 100, 50, 50);
-        aButtons[9].setBounds(167, 100, 50, 50);
+    public void assignSize() {
+        aNumbers[0].setBounds(87, 355, 50, 50);
+
+        aNumbers[1].setBounds(7, 270, 50, 50);
+        aNumbers[2].setBounds(87, 270, 50, 50);
+        aNumbers[3].setBounds(167, 270, 50, 50);
+
+        aNumbers[4].setBounds(7, 185, 50, 50);
+        aNumbers[5].setBounds(87, 185, 50, 50);
+        aNumbers[6].setBounds(167, 185, 50, 50);
+
+        aNumbers[7].setBounds(7, 100, 50, 50);
+        aNumbers[8].setBounds(87, 100, 50, 50);
+        aNumbers[9].setBounds(167, 100, 50, 50);
+
+        // Sum, sub, mul, div, equal, C
+        aSigns[0].setBounds(167, 355, 50, 50);
+        aSigns[1].setBounds(247, 270, 50, 50);
+        aSigns[2].setBounds(247, 187, 50, 50);
+        aSigns[3].setBounds(247, 100, 50, 50);
+        aSigns[4].setBounds(247, 355, 50, 50);
+        aSigns[5].setBounds(7, 355, 50, 50);
     }
 
-    public void assignValue(){
-        aButtons[0].setText("0");
-        aButtons[1].setText("1");
-        aButtons[2].setText("2");
-        aButtons[3].setText("3");
-        aButtons[4].setText("4");
-        aButtons[5].setText("5");
-        aButtons[6].setText("6");
-        aButtons[7].setText("7");
-        aButtons[8].setText("8");
-        aButtons[9].setText("9");
+    public void assignValue() {
+        aSigns[0].setText("+");
+        aSigns[1].setText("-");
+        aSigns[2].setText("*");
+        aSigns[3].setText("/");
+        aSigns[4].setText("=");
+        aSigns[5].setText("c");
     }
 
-
-    private int hex(String color_hex){
+    private int hex(String color_hex) {
         return Integer.parseInt(color_hex, 16);
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        for(int i = 0; i < 10; i++){
+            String s = String.valueOf(i);
+            if(e.getActionCommand().equals(s)){
+                printNumber(s);
+            }
+        }
+        if(e.getActionCommand().equals("+")){
+            printNumber("+");
+        }
+        if(e.getActionCommand().equals("-")){
+            printNumber("-");
+        }
+        if(e.getActionCommand().equals("*")){
+            printNumber("*");
+        }
+        if(e.getActionCommand().equals("/")){
+            printNumber("/");
+        }
+        if(e.getActionCommand().equals("=")){
+            analizeText();
+        }
+        if(e.getActionCommand().equals("c")){
+            delete();
+        }
+    }
+
+    public void printNumber(String s){
+        labOperation.setText(labOperation.getText() + s);
+    }
+
+    public void delete(){
+        labOperation.setText("");
+    }
+
+    public void 
 
     private JFrame frame = new JFrame("Calculator");
     private JPanel panel = new JPanel(null);
     private JPanel panel2 = new JPanel(null);
-    private JLabel labOperation = new JLabel("Txt1");
-    private JLabel labResult = new JLabel("Txt2");
-    JButton aButtons[] = new JButton[10];
+    private JLabel labOperation = new JLabel();
+    private JLabel labResult = new JLabel();
+    private JButton aNumbers[] = new JButton[10];
+    private JButton aSigns[] = new JButton[6];
     Color c = new Color(hex("0C1332"));
     private ImageIcon btn1 = new ImageIcon("src/Images/btn1.png");
     private ImageIcon btn1_pressed = new ImageIcon("src/Images/btn1_pressed.png");
+    private ImageIcon btn_special = new ImageIcon("src/Images/ButtonsSpecials.png");
 }
