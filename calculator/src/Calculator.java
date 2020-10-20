@@ -172,7 +172,7 @@ public class Calculator implements ActionListener {
             printNumber("/");
         }
         if(e.getActionCommand().equals("=")){
-            analizeText();
+            analizeText(labOperation.getText());
         }
         if(e.getActionCommand().equals("c")){
             delete();
@@ -185,9 +185,67 @@ public class Calculator implements ActionListener {
 
     public void delete(){
         labOperation.setText("");
+        labResult.setText("");
     }
 
-    public void 
+    public void analizeText(String s){
+        int num1 = 0;
+        int num2 = 0;
+        String array[] = null;
+        char sum, sub, mul, div;
+
+        if(s.contains("+")){
+            sum = '+';
+            array = s.split("\\+");
+            num1 = Integer.valueOf(array[0].trim());
+            num2 = Integer.valueOf(array[1].trim());
+            result(num1, num2, sum);
+        }
+        if(s.contains("-")){
+            sub = '-';
+            array = s.split("-");
+            num1 = Integer.valueOf(array[0].trim());
+            num2 = Integer.valueOf(array[1].trim());
+            result(num1, num2, sub);
+        }
+        if(s.contains("*")){
+            mul = '*';
+            array = s.split("\\*");
+            num1 = Integer.valueOf(array[0].trim());
+            num2 = Integer.valueOf(array[1].trim());
+            result(num1, num2, mul);
+        }
+        if(s.contains("/")){
+            div = '/';
+            array = s.split("/");
+            num1 = Integer.valueOf(array[0].trim());
+            num2 = Integer.valueOf(array[1].trim());
+            result(num1, num2, div);
+        }
+    }
+
+    public void result(int num1, int num2, char o){
+        int result = 0;
+        String total = null;;
+
+        switch(o){
+            case '+': 
+                result = num1 + num2;
+            break;
+            case '-':
+                result = num1 - num2;
+            break;
+            case '*':
+                result = num1 * num2;
+            break;
+            case '/':
+                result = num1 / num2;
+            break;
+        }
+        
+        total = String.valueOf(result);
+        labResult.setText(total);
+    }
 
     private JFrame frame = new JFrame("Calculator");
     private JPanel panel = new JPanel(null);
