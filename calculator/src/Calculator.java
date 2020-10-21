@@ -189,15 +189,15 @@ public class Calculator implements ActionListener {
     }
 
     public void analizeText(String s){
-        int num1 = 0;
-        int num2 = 0;
+        double num1 = 0;
+        double num2 = 0;
         String array[] = null;
         char sum, sub, mul, div;
 
         if(s.contains("+")){
             sum = '+';
             array = s.split("\\+");
-            num1 = Integer.valueOf(array[0].trim());
+            num1 = Integer.valueOf(array[0].trim());   
             num2 = Integer.valueOf(array[1].trim());
             result(num1, num2, sum);
         }
@@ -224,8 +224,8 @@ public class Calculator implements ActionListener {
         }
     }
 
-    public void result(int num1, int num2, char o){
-        int result = 0;
+    public void result(double num1, double num2, char o){
+        double result = 0;
         String total = null;;
 
         switch(o){
