@@ -189,61 +189,59 @@ public class Calculator implements ActionListener {
     }
 
     public void analizeText(String s){
-        double num1 = 0;
-        double num2 = 0;
-        String array[] = null;
-        char sum, sub, mul, div;
-
-        if(s.contains("+")){
-            sum = '+';
-            array = s.split("\\+");
-            num1 = Integer.valueOf(array[0].trim());   
-            num2 = Integer.valueOf(array[1].trim());
-            result(num1, num2, sum);
-        }
-        if(s.contains("-")){
-            sub = '-';
-            array = s.split("-");
-            num1 = Integer.valueOf(array[0].trim());
-            num2 = Integer.valueOf(array[1].trim());
-            result(num1, num2, sub);
-        }
-        if(s.contains("*")){
-            mul = '*';
-            array = s.split("\\*");
-            num1 = Integer.valueOf(array[0].trim());
-            num2 = Integer.valueOf(array[1].trim());
-            result(num1, num2, mul);
-        }
-        if(s.contains("/")){
-            div = '/';
-            array = s.split("/");
-            num1 = Integer.valueOf(array[0].trim());
-            num2 = Integer.valueOf(array[1].trim());
-            result(num1, num2, div);
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == '+' || s.charAt(i) == '-' || s.charAt(i) == '*' || s.charAt(i) == '/'){
+                char c = s.charAt(i);
+                raro(c, s);
+            }
         }
     }
 
-    public void result(double num1, double num2, char o){
+    public void raro(char c, String s){
+        double num1 = 0;
+        double num2 = 0;
+        String array[] = null;
+
+        for(int j = 0; j < operators.length; j++){
+            if(c == operators[j].charAt(0)){
+                String a = String.valueOf(operators[j].charAt(0));
+                array = s.split(a);
+                num1 = Double.parseDouble(array[0].trim());
+                num2 = Double.parseDouble(array[1].trim());
+                result(num1, num2, a);
+            }else if(c == operators[j].charAt(1)){
+                array = s.split(operators[j]);
+                num1 = Double.parseDouble(array[0].trim());
+                num2 = Double.parseDouble(array[1].trim());
+                result(num1, num2, operators[j]);
+            }
+        }
+    }
+
+    public void result(double num1, double num2, String o){
         double result = 0;
-        String total = null;;
+        String total = null;
 
         switch(o){
-            case '+': 
+            case "\\+": 
                 result = num1 + num2;
             break;
-            case '-':
+            case "-":
                 result = num1 - num2;
             break;
-            case '*':
+            case "\\*":
                 result = num1 * num2;
             break;
-            case '/':
+            case "/":
                 result = num1 / num2;
             break;
         }
+        if(result % 1 == 0){
+            total = String.valueOf((int) result);
+        }else{
+            total = String.valueOf(result);
+        }
         
-        total = String.valueOf(result);
         labResult.setText(total);
     }
 
@@ -254,6 +252,7 @@ public class Calculator implements ActionListener {
     private JLabel labResult = new JLabel();
     private JButton aNumbers[] = new JButton[10];
     private JButton aSigns[] = new JButton[6];
+    private String[] operators = {"\\+", "- ", "\\*", "/ ", "= ", "c "};
     Color c = new Color(hex("0C1332"));
     private ImageIcon btn1 = new ImageIcon("src/Images/btn1.png");
     private ImageIcon btn1_pressed = new ImageIcon("src/Images/btn1_pressed.png");
