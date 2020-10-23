@@ -52,7 +52,6 @@ public class Calculator implements ActionListener {
 
         setLabels();
         createButtons();
-        assignSize();
         assignValue();
     }
 
@@ -92,6 +91,7 @@ public class Calculator implements ActionListener {
             aNumbers[i].setIcon(btn1);
             aNumbers[i].setRolloverIcon(btn1_pressed);
             aNumbers[i].setText(number);
+            assignSizeNumber(aNumbers[i], i);
             aNumbers[i].addActionListener(this);
 
             panel2.add(aNumbers[i]);
@@ -114,8 +114,36 @@ public class Calculator implements ActionListener {
         }
     }
 
-    public void assignSize() {
-        aNumbers[0].setBounds(87, 355, 50, 50);
+    public void assignSizeNumber(JButton button, int i) {
+        int width = 50;
+        int height = 50;
+
+        if(i == 0){
+            button.setBounds(x + 80, 355, width, height);
+        }
+        else if(i >= 1 && i <= 3){
+            button.setBounds(x, 270, width, height);
+            x = x + 80;
+            x = cleanX(i, x);
+        }
+        else if(i >= 4 && i <= 6){
+            button.setBounds(x, 185, width, height);
+            x = x + 80;
+            x = cleanX(i, x);
+        }
+        else if(i >= 7 && i <= 9){
+            button.setBounds(x, 100, width, height);
+            x = x + 80;
+            x = cleanX(i, x);
+        }
+
+
+
+
+
+
+
+   /*      aNumbers[0].setBounds(87, 355, 50, 50);
 
         aNumbers[1].setBounds(7, 270, 50, 50);
         aNumbers[2].setBounds(87, 270, 50, 50);
@@ -135,7 +163,14 @@ public class Calculator implements ActionListener {
         aSigns[2].setBounds(247, 187, 50, 50);
         aSigns[3].setBounds(247, 100, 50, 50);
         aSigns[4].setBounds(247, 355, 50, 50);
-        aSigns[5].setBounds(7, 355, 50, 50);
+        aSigns[5].setBounds(7, 355, 50, 50); */
+    }
+
+    public int cleanX(int i, int x){
+        if(i == 3 || i == 6 || i == 9){
+            return 7;
+        }
+        return x;
     }
 
     public void assignValue() {
@@ -257,4 +292,5 @@ public class Calculator implements ActionListener {
     private ImageIcon btn1 = new ImageIcon("src/Images/btn1.png");
     private ImageIcon btn1_pressed = new ImageIcon("src/Images/btn1_pressed.png");
     private ImageIcon btn_special = new ImageIcon("src/Images/ButtonsSpecials.png");
+    private int x = 7;
 }
