@@ -108,6 +108,7 @@ public class Calculator implements ActionListener {
             aSigns[i].setForeground(c);
             aSigns[i].setIcon(btn_special);
             aSigns[i].setRolloverIcon(btn1_pressed);
+            assignSizeSign(aSigns[i], i);
             aSigns[i].addActionListener(this);
 
             panel2.add(aSigns[i]);
@@ -115,9 +116,6 @@ public class Calculator implements ActionListener {
     }
 
     public void assignSizeNumber(JButton button, int i) {
-        int width = 50;
-        int height = 50;
-
         if(i == 0){
             button.setBounds(x + 80, 355, width, height);
         }
@@ -171,6 +169,20 @@ public class Calculator implements ActionListener {
             return 7;
         }
         return x;
+    }
+
+    public void assignSizeSign(JButton button, int i){
+        if(i == 0){
+            button.setBounds(x + 160, y, width, height);
+        }
+        else if(i >= 1 && i <= 4){
+            button.setBounds(x + 240, y, width, height);
+            cleanY(i, y);
+        }
+    }
+
+    public int cleanY(int i, int Y){
+        return 
     }
 
     public void assignValue() {
@@ -293,4 +305,7 @@ public class Calculator implements ActionListener {
     private ImageIcon btn1_pressed = new ImageIcon("src/Images/btn1_pressed.png");
     private ImageIcon btn_special = new ImageIcon("src/Images/ButtonsSpecials.png");
     private int x = 7;
+    private int y = 100;
+    int width = 50;
+    int height = 50;
 }
