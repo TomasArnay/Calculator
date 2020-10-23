@@ -132,7 +132,7 @@ public class Calculator implements ActionListener {
         // Sum, sub, mul, div, equal, C
         aSigns[0].setBounds(167, 355, 50, 50);
         aSigns[1].setBounds(247, 270, 50, 50);
-        aSigns[2].setBounds(247, 187, 50, 50);
+        aSigns[2].setBounds(247, 185, 50, 50);
         aSigns[3].setBounds(247, 100, 50, 50);
         aSigns[4].setBounds(247, 355, 50, 50);
         aSigns[5].setBounds(7, 355, 50, 50);
