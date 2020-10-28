@@ -52,7 +52,6 @@ public class Calculator implements ActionListener {
 
         setLabels();
         createButtons();
-        assignSize();
         assignValue();
     }
 
@@ -92,6 +91,7 @@ public class Calculator implements ActionListener {
             aNumbers[i].setIcon(btn1);
             aNumbers[i].setRolloverIcon(btn1_pressed);
             aNumbers[i].setText(number);
+            assignSizeNumber(aNumbers[i], i);
             aNumbers[i].addActionListener(this);
 
             panel2.add(aNumbers[i]);
@@ -108,42 +108,63 @@ public class Calculator implements ActionListener {
             aSigns[i].setForeground(c);
             aSigns[i].setIcon(btn_special);
             aSigns[i].setRolloverIcon(btn1_pressed);
+            assignSizeSign(aSigns[i], i);
             aSigns[i].addActionListener(this);
 
             panel2.add(aSigns[i]);
         }
     }
 
-    public void assignSize() {
-        aNumbers[0].setBounds(87, 355, 50, 50);
+    public void assignSizeNumber(JButton button, int i) {
+        if(i == 0){
+            button.setBounds(x + 80, 355, width, height);
+        }
+        else if(i >= 1 && i <= 3){
+            button.setBounds(x, 270, width, height);
+            x = x + 80;
+            x = cleanX(i, x);
+        }
+        else if(i >= 4 && i <= 6){
+            button.setBounds(x, 185, width, height);
+            x = x + 80;
+            x = cleanX(i, x);
+        }
+        else if(i >= 7 && i <= 9){
+            button.setBounds(x, 100, width, height);
+            x = x + 80;
+            x = cleanX(i, x);
+        }
+    }
 
-        aNumbers[1].setBounds(7, 270, 50, 50);
-        aNumbers[2].setBounds(87, 270, 50, 50);
-        aNumbers[3].setBounds(167, 270, 50, 50);
+    public int cleanX(int i, int x){
+        if(i == 3 || i == 6 || i == 9){
+            return 7;
+        }
+        return x;
+    }
 
-        aNumbers[4].setBounds(7, 185, 50, 50);
-        aNumbers[5].setBounds(87, 185, 50, 50);
-        aNumbers[6].setBounds(167, 185, 50, 50);
-
-        aNumbers[7].setBounds(7, 100, 50, 50);
-        aNumbers[8].setBounds(87, 100, 50, 50);
-        aNumbers[9].setBounds(167, 100, 50, 50);
-
-        // Sum, sub, mul, div, equal, C
-        aSigns[0].setBounds(167, 355, 50, 50);
-        aSigns[1].setBounds(247, 270, 50, 50);
-        aSigns[2].setBounds(247, 185, 50, 50);
-        aSigns[3].setBounds(247, 100, 50, 50);
-        aSigns[4].setBounds(247, 355, 50, 50);
-        aSigns[5].setBounds(7, 355, 50, 50);
+    public void assignSizeSign(JButton button, int i){
+        x = 247;
+        if(i >= 0 && i <= 3){
+            button.setBounds(x, y, width, height);
+            if(i >= 0 && i <= 2){
+                y = y + 85;
+            }
+        }
+        else if(i == 4){
+            button.setBounds(x - 80, y, width, height);
+        }
+        else if(i == 5){
+            button.setBounds(x - 240, y, width, height);
+        }
     }
 
     public void assignValue() {
-        aSigns[0].setText("+");
-        aSigns[1].setText("-");
-        aSigns[2].setText("*");
-        aSigns[3].setText("/");
-        aSigns[4].setText("=");
+        aSigns[0].setText("/");
+        aSigns[1].setText("*");
+        aSigns[2].setText("-");
+        aSigns[3].setText("=");
+        aSigns[4].setText("+");
         aSigns[5].setText("c");
     }
 
@@ -257,4 +278,8 @@ public class Calculator implements ActionListener {
     private ImageIcon btn1 = new ImageIcon("src/Images/btn1.png");
     private ImageIcon btn1_pressed = new ImageIcon("src/Images/btn1_pressed.png");
     private ImageIcon btn_special = new ImageIcon("src/Images/ButtonsSpecials.png");
+    private int x = 7;
+    private int y = 100;
+    int width = 50;
+    int height = 50;
 }
