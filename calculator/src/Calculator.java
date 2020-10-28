@@ -134,34 +134,6 @@ public class Calculator implements ActionListener {
             x = x + 80;
             x = cleanX(i, x);
         }
-
-
-
-
-
-
-
-   /*      aNumbers[0].setBounds(87, 355, 50, 50);
-
-        aNumbers[1].setBounds(7, 270, 50, 50);
-        aNumbers[2].setBounds(87, 270, 50, 50);
-        aNumbers[3].setBounds(167, 270, 50, 50);
-
-        aNumbers[4].setBounds(7, 185, 50, 50);
-        aNumbers[5].setBounds(87, 185, 50, 50);
-        aNumbers[6].setBounds(167, 185, 50, 50);
-
-        aNumbers[7].setBounds(7, 100, 50, 50);
-        aNumbers[8].setBounds(87, 100, 50, 50);
-        aNumbers[9].setBounds(167, 100, 50, 50);
-
-        // Sum, sub, mul, div, equal, C
-        aSigns[0].setBounds(167, 355, 50, 50);
-        aSigns[1].setBounds(247, 270, 50, 50);
-        aSigns[2].setBounds(247, 187, 50, 50);
-        aSigns[3].setBounds(247, 100, 50, 50);
-        aSigns[4].setBounds(247, 355, 50, 50);
-        aSigns[5].setBounds(7, 355, 50, 50); */
     }
 
     public int cleanX(int i, int x){
@@ -172,25 +144,27 @@ public class Calculator implements ActionListener {
     }
 
     public void assignSizeSign(JButton button, int i){
-        if(i == 0){
-            button.setBounds(x + 160, y, width, height);
+        x = 247;
+        if(i >= 0 && i <= 3){
+            button.setBounds(x, y, width, height);
+            if(i >= 0 && i <= 2){
+                y = y + 85;
+            }
         }
-        else if(i >= 1 && i <= 4){
-            button.setBounds(x + 240, y, width, height);
-            cleanY(i, y);
+        else if(i == 4){
+            button.setBounds(x - 80, y, width, height);
         }
-    }
-
-    public int cleanY(int i, int Y){
-        return 
+        else if(i == 5){
+            button.setBounds(x - 240, y, width, height);
+        }
     }
 
     public void assignValue() {
-        aSigns[0].setText("+");
-        aSigns[1].setText("-");
-        aSigns[2].setText("*");
-        aSigns[3].setText("/");
-        aSigns[4].setText("=");
+        aSigns[0].setText("/");
+        aSigns[1].setText("*");
+        aSigns[2].setText("-");
+        aSigns[3].setText("=");
+        aSigns[4].setText("+");
         aSigns[5].setText("c");
     }
 
