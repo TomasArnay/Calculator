@@ -115,6 +115,7 @@ public class Calculator implements ActionListener {
         }
     }
 
+    //Define position of the numbers
     public void assignSizeNumber(JButton button, int i) {
         if(i == 0){
             button.setBounds(x + 80, 355, width, height);
@@ -142,7 +143,8 @@ public class Calculator implements ActionListener {
         }
         return x;
     }
-
+    
+    //Define position of signs
     public void assignSizeSign(JButton button, int i){
         x = 247;
         if(i >= 0 && i <= 3){
@@ -168,10 +170,12 @@ public class Calculator implements ActionListener {
         aSigns[5].setText("c");
     }
 
+    //Convert color
     private int hex(String color_hex) {
         return Integer.parseInt(color_hex, 16);
     }
 
+    //Handler events
     @Override
     public void actionPerformed(ActionEvent e) {
         for(int i = 0; i < 10; i++){
@@ -200,25 +204,29 @@ public class Calculator implements ActionListener {
         }
     }
 
+    //Print number in the label
     public void printNumber(String s){
         labOperation.setText(labOperation.getText() + s);
     }
 
+    //Delete label
     public void delete(){
         labOperation.setText("");
         labResult.setText("");
     }
 
+    //Find sign
     public void analizeText(String s){
         for(int i = 0; i < s.length(); i++){
             if(s.charAt(i) == '+' || s.charAt(i) == '-' || s.charAt(i) == '*' || s.charAt(i) == '/'){
                 char c = s.charAt(i);
-                raro(c, s);
+                getSign(c, s);
             }
         }
     }
 
-    public void raro(char c, String s){
+    //Get sign of operation
+    public void getSign(char c, String s){
         double num1 = 0;
         double num2 = 0;
         String array[] = null;
@@ -239,6 +247,7 @@ public class Calculator implements ActionListener {
         }
     }
 
+    //perform the operation
     public void result(double num1, double num2, String o){
         double result = 0;
         String total = null;
@@ -266,6 +275,7 @@ public class Calculator implements ActionListener {
         labResult.setText(total);
     }
 
+    //Variables
     private JFrame frame = new JFrame("Calculator");
     private JPanel panel = new JPanel(null);
     private JPanel panel2 = new JPanel(null);
