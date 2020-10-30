@@ -46,6 +46,7 @@ public class Calculator implements ActionListener {
 
         panel.add(labOperation);
         panel.add(labResult);
+        panel.add(darkMode);
 
         panel.setBounds(0, 0, 320, 100);
         panel2.setBounds(0, 100, 320, 340);
@@ -58,8 +59,8 @@ public class Calculator implements ActionListener {
 
     public void setLabels() {
         // Size of labels
-        labOperation.setBounds(0, 20, 320, 20);
-        labResult.setBounds(0, 60, 320, 30);
+        labOperation.setBounds(0, 20, 290, 20);
+        labResult.setBounds(0, 60, 290, 30);
 
         // Text of labels
         labOperation.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -74,7 +75,7 @@ public class Calculator implements ActionListener {
     }
 
     public void setDarkMode(){
-        darkMode.setBounds(0, 10, 50, 25);
+        darkMode.setBounds(0, 0, 50, 25);
         darkMode.setFont(new Font("Arial", Font.PLAIN, 30));
         darkMode.setBorder(compound);
         darkMode.setForeground(c);
