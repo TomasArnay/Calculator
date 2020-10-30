@@ -75,10 +75,12 @@ public class Calculator implements ActionListener {
     }
 
     public void setDarkMode(){
-        darkMode.setBounds(0, 0, 50, 25);
-        darkMode.setFont(new Font("Arial", Font.PLAIN, 30));
+        darkMode.setBounds(0, 0, 80, 20);
+        darkMode.setFont(new Font("Arial", Font.PLAIN, 15));
         darkMode.setBorder(compound);
         darkMode.setForeground(c);
+        darkMode.setText("Theme");
+        darkMode.addActionListener(this);
     }
 
     public void createButtons() {
@@ -208,6 +210,9 @@ public class Calculator implements ActionListener {
         if(e.getActionCommand().equals("c")){
             delete();
         }
+        if(e.getActionCommand().equals("Theme")){
+            darkTheme();
+        }
     }
     
     //Print number in the label
@@ -279,6 +284,10 @@ public class Calculator implements ActionListener {
         }
         
         labResult.setText(total);
+    }
+
+    public void darkTheme(){
+        panel.setBackground(Color.black);
     }
     
     //Variables
