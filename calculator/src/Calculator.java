@@ -51,14 +51,15 @@ public class Calculator implements ActionListener {
         panel2.setBounds(0, 100, 320, 340);
 
         setLabels();
+        setDarkMode();
         createButtons();
         assignValue();
     }
 
     public void setLabels() {
         // Size of labels
-        labOperation.setBounds(0, 20, 290, 20);
-        labResult.setBounds(0, 60, 290, 30);
+        labOperation.setBounds(0, 20, 320, 20);
+        labResult.setBounds(0, 60, 320, 30);
 
         // Text of labels
         labOperation.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -72,16 +73,20 @@ public class Calculator implements ActionListener {
         labResult.setForeground(c);
     }
 
+    public void setDarkMode(){
+        darkMode.setBounds(0, 10, 50, 25);
+        darkMode.setFont(new Font("Arial", Font.PLAIN, 30));
+        darkMode.setBorder(compound);
+        darkMode.setForeground(c);
+    }
+
     public void createButtons() {
         String name = "Button";
         String special = "Special";
-        Border line = new LineBorder(Color.WHITE);
-        Border margin = new EmptyBorder(5, 15, 5, 15);
-        Border compound = new CompoundBorder(line, margin);
-
+        
         for (int i = 0; i < 10; i++) {
             String number = String.valueOf(i);
-
+            
             aNumbers[i] = new JButton();
             aNumbers[i].setName(name + number);
             aNumbers[i].setFont(new Font("Arial", Font.PLAIN, 30));
@@ -93,13 +98,13 @@ public class Calculator implements ActionListener {
             aNumbers[i].setText(number);
             assignSizeNumber(aNumbers[i], i);
             aNumbers[i].addActionListener(this);
-
+            
             panel2.add(aNumbers[i]);
         }
-
+        
         for (int i = 0; i < 6; i++) {
             String number = String.valueOf(i);
-
+            
             aSigns[i] = new JButton();
             aSigns[i].setName(special + number);
             aSigns[i].setFont(new Font("Arial", Font.PLAIN, 30));
@@ -110,11 +115,11 @@ public class Calculator implements ActionListener {
             aSigns[i].setRolloverIcon(btn1_pressed);
             assignSizeSign(aSigns[i], i);
             aSigns[i].addActionListener(this);
-
+            
             panel2.add(aSigns[i]);
         }
     }
-
+    
     //Define position of the numbers
     public void assignSizeNumber(JButton button, int i) {
         if(i == 0){
@@ -136,7 +141,7 @@ public class Calculator implements ActionListener {
             x = cleanX(i, x);
         }
     }
-
+    
     public int cleanX(int i, int x){
         if(i == 3 || i == 6 || i == 9){
             return 7;
@@ -160,7 +165,7 @@ public class Calculator implements ActionListener {
             button.setBounds(x - 240, y, width, height);
         }
     }
-
+    
     public void assignValue() {
         aSigns[0].setText("/");
         aSigns[1].setText("*");
@@ -169,12 +174,12 @@ public class Calculator implements ActionListener {
         aSigns[4].setText("+");
         aSigns[5].setText("c");
     }
-
+    
     //Convert color
     private int hex(String color_hex) {
         return Integer.parseInt(color_hex, 16);
     }
-
+    
     //Handler events
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -203,18 +208,18 @@ public class Calculator implements ActionListener {
             delete();
         }
     }
-
+    
     //Print number in the label
     public void printNumber(String s){
         labOperation.setText(labOperation.getText() + s);
     }
-
+    
     //Delete label
     public void delete(){
         labOperation.setText("");
         labResult.setText("");
     }
-
+    
     //Find sign
     public void analizeText(String s){
         for(int i = 0; i < s.length(); i++){
@@ -224,13 +229,13 @@ public class Calculator implements ActionListener {
             }
         }
     }
-
+    
     //Get sign of operation
     public void getSign(char c, String s){
         double num1 = 0;
         double num2 = 0;
         String array[] = null;
-
+        
         for(int j = 0; j < operators.length; j++){
             if(c == operators[j].charAt(0)){
                 String a = String.valueOf(operators[j].charAt(0));
@@ -246,24 +251,24 @@ public class Calculator implements ActionListener {
             }
         }
     }
-
+    
     //perform the operation
     public void result(double num1, double num2, String o){
         double result = 0;
         String total = null;
-
+        
         switch(o){
             case "\\+": 
-                result = num1 + num2;
+            result = num1 + num2;
             break;
             case "-":
-                result = num1 - num2;
+            result = num1 - num2;
             break;
             case "\\*":
-                result = num1 * num2;
+            result = num1 * num2;
             break;
             case "/":
-                result = num1 / num2;
+            result = num1 / num2;
             break;
         }
         if(result % 1 == 0){
@@ -274,7 +279,7 @@ public class Calculator implements ActionListener {
         
         labResult.setText(total);
     }
-
+    
     //Variables
     private JFrame frame = new JFrame("Calculator");
     private JPanel panel = new JPanel(null);
@@ -292,4 +297,8 @@ public class Calculator implements ActionListener {
     private int y = 100;
     int width = 50;
     int height = 50;
+    private JButton darkMode = new JButton();
+    private Border line = new LineBorder(Color.WHITE);
+    private Border margin = new EmptyBorder(5, 15, 5, 15);
+    private Border compound = new CompoundBorder(line, margin);
 }
