@@ -12,9 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
 public class Calculator implements ActionListener {
     public void start() {
@@ -38,7 +36,7 @@ public class Calculator implements ActionListener {
     }
 
     public void setPanel() {
-        Color colorFrame = new Color(hex("f4fdfb"));
+        Color colorFrame = new Color(hex("D1F7F5"));
         Color colorFrame2 = new Color(hex("ffffff"));
 
         panel.setBackground(colorFrame);
@@ -46,10 +44,10 @@ public class Calculator implements ActionListener {
 
         panel.add(labOperation);
         panel.add(labResult);
-        panel.add(darkMode);
+        panel.add(darkModeButton);
 
         panel.setBounds(0, 0, 320, 100);
-        panel2.setBounds(0, 100, 320, 340);
+        panel2.setBounds(0, 100, 320, 350);
 
         setLabels();
         setDarkMode();
@@ -75,12 +73,12 @@ public class Calculator implements ActionListener {
     }
 
     public void setDarkMode(){
-        darkMode.setBounds(0, 0, 80, 20);
-        darkMode.setFont(new Font("Arial", Font.PLAIN, 15));
-        darkMode.setBorder(compound);
-        darkMode.setForeground(c);
-        darkMode.setText("Theme");
-        darkMode.addActionListener(this);
+        darkModeButton.setBounds(0, 0, 80, 20);
+        darkModeButton.setFont(new Font("Arial", Font.PLAIN, 15));
+        darkModeButton.setBorder(margin);
+        darkModeButton.setForeground(c);
+        darkModeButton.setText("Theme");
+        darkModeButton.addActionListener(this);
     }
 
     public void createButtons() {
@@ -94,11 +92,11 @@ public class Calculator implements ActionListener {
             aNumbers[i].setName(name + number);
             aNumbers[i].setFont(new Font("Arial", Font.PLAIN, 30));
             aNumbers[i].setHorizontalTextPosition(SwingConstants.CENTER);
-            aNumbers[i].setBorder(compound);
-            aNumbers[i].setForeground(c);
+            aNumbers[i].setBorder(margin);
             aNumbers[i].setIcon(btn1);
             aNumbers[i].setRolloverIcon(btn1_pressed);
             aNumbers[i].setText(number);
+            aNumbers[i].setForeground(numberColor);
             assignSizeNumber(aNumbers[i], i);
             aNumbers[i].addActionListener(this);
             
@@ -112,10 +110,10 @@ public class Calculator implements ActionListener {
             aSigns[i].setName(special + number);
             aSigns[i].setFont(new Font("Arial", Font.PLAIN, 30));
             aSigns[i].setHorizontalTextPosition(SwingConstants.CENTER);
-            aSigns[i].setBorder(compound);
-            aSigns[i].setForeground(c);
+            aSigns[i].setBorder(margin);
             aSigns[i].setIcon(btn_special);
             aSigns[i].setRolloverIcon(btn1_pressed);
+            aSigns[i].setForeground(numberColor);
             assignSizeSign(aSigns[i], i);
             aSigns[i].addActionListener(this);
             
@@ -211,6 +209,7 @@ public class Calculator implements ActionListener {
             delete();
         }
         if(e.getActionCommand().equals("Theme")){
+            count++;
             darkTheme();
         }
     }
@@ -279,15 +278,47 @@ public class Calculator implements ActionListener {
         }
         if(result % 1 == 0){
             total = String.valueOf((int) result);
-        }else{
+        } else{
             total = String.valueOf(result);
         }
         
         labResult.setText(total);
     }
-
+    
     public void darkTheme(){
-        panel.setBackground(Color.black);
+        if(count % 2 != 0){
+            ImageIcon theme_button_dark = new ImageIcon("src/Images/theme_button.png");
+            Color color_dark_button = new Color(hex("ffffff"));
+            darkModeButton.setIcon(theme_button_dark);
+            darkModeButton.setForeground(color_dark_button);
+            darkModeButton.setHorizontalTextPosition(SwingConstants.CENTER);
+
+            Color panelDark = new Color(hex("212b41"));
+            Color panelDark2 = new Color(hex("2e3951"));
+
+            Color labDark = new Color(hex("97DBD0"));
+
+            panel.setBackground(panelDark);
+            panel2.setBackground(panelDark2);
+
+            labOperation.setForeground(labDark);
+            labResult.setForeground(labDark);
+
+            for(int i = 0; i < aNumbers.length; i++){
+                aNumbers[i].setIcon(btn_number_dark);
+                aNumbers[i].setForeground(numberColorDark);
+                aNumbers[i].setRolloverIcon(btn_number_dark_pressed);
+            }
+
+            for(int i = 0; i < aSigns.length; i++){
+                aSigns[i].setIcon(btn_special_dark);
+                aSigns[i].setForeground(labDark);
+                aSigns[i].setRolloverIcon(btn_special_dark_pressed);
+            }
+        }else{
+            Calculator c = new Calculator();
+            c.start();
+        }
     }
     
     //Variables
@@ -299,16 +330,21 @@ public class Calculator implements ActionListener {
     private JButton aNumbers[] = new JButton[10];
     private JButton aSigns[] = new JButton[6];
     private String[] operators = {"\\+", "- ", "\\*", "/ ", "= ", "c "};
-    Color c = new Color(hex("0C1332"));
-    private ImageIcon btn1 = new ImageIcon("src/Images/btn1.png");
+    private Color c = new Color(hex("0C1332"));
+    private ImageIcon btn1 = new ImageIcon("src/Images/btn_numbers.png");
     private ImageIcon btn1_pressed = new ImageIcon("src/Images/btn1_pressed.png");
-    private ImageIcon btn_special = new ImageIcon("src/Images/ButtonsSpecials.png");
+    private ImageIcon btn_special = new ImageIcon("src/Images/btn1.png");
+    private ImageIcon btn_number_dark = new ImageIcon("src/Images/background_number_dark.png");
+    private ImageIcon btn_number_dark_pressed = new ImageIcon("src/Images/background_dark_number_pressed.png");
+    private ImageIcon btn_special_dark = new ImageIcon("src/Images/background_special_dark.png");
+    private ImageIcon btn_special_dark_pressed = new ImageIcon("src/Images/background_special_dark_pressed.png");
     private int x = 7;
     private int y = 100;
     int width = 50;
     int height = 50;
-    private JButton darkMode = new JButton();
-    private Border line = new LineBorder(Color.WHITE);
+    private JButton darkModeButton = new JButton();
     private Border margin = new EmptyBorder(5, 15, 5, 15);
-    private Border compound = new CompoundBorder(line, margin);
+    private Color numberColor = new Color(hex("4F4E4E"));
+    private Color numberColorDark = new Color(hex("D8D8DA"));
+    private int count; 
 }
