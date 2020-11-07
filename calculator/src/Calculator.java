@@ -96,7 +96,7 @@ public class Calculator implements ActionListener{
         dragged.setBounds(0, 0, 320, 120);
 
         // Text of labels
-        labOperation.setFont(new Font("Arial", Font.PLAIN, 20));
+        labOperation.setFont(new Font("Arial", Font.PLAIN, 25));
         labOperation.setHorizontalAlignment(SwingConstants.RIGHT);
 
         labResult.setFont(new Font("Arial", Font.PLAIN, 40));
