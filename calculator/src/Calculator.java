@@ -354,64 +354,36 @@ public class Calculator implements ActionListener{
     
     public void darkTheme(){
         if(count % 2 != 0){
-            ImageIcon theme_button_dark = new ImageIcon("calculator/src/Images/theme_button.png");
-            Color panelDark = new Color(hex("212b41"));
-            Color panelDark2 = new Color(hex("2e3951"));
-            Color color_dark_button = new Color(hex("ffffff"));
-            Color labDark = new Color(hex("97DBD0"));
-
-            darkModeButton.setIcon(theme_button_dark);
-            darkModeButton.setForeground(color_dark_button);
-            darkModeButton.setHorizontalTextPosition(SwingConstants.CENTER);
-
-            panel.setBackground(panelDark);
-            panel2.setBackground(panelDark2);
-
-            labOperation.setForeground(labDark);
-            labResult.setForeground(labDark);
-
-            for(int i = 0; i < aNumbers.length; i++){
-                aNumbers[i].setIcon(btn_number_dark);
-                aNumbers[i].setForeground(numberColorDark);
-                aNumbers[i].setRolloverIcon(btn_number_dark_pressed);
-            }
-
-            for(int i = 0; i < aSigns.length; i++){
-                aSigns[i].setIcon(btn_special_dark);
-                aSigns[i].setForeground(labDark);
-                aSigns[i].setRolloverIcon(btn_special_dark_pressed);
-            }
+            DarkMode d = new DarkMode(panel, panel2, darkModeButton, labOperation, labResult, aNumbers, aSigns);
+            d.start();
         }else{
             Calculator c = new Calculator();
             c.start();
         }
     }
     
-    //Variables
+    //Public variables
+    public JPanel panel = new JPanel(null);
+    public JPanel panel2 = new JPanel(null);
+    public JLabel labOperation = new JLabel();
+    public JLabel labResult = new JLabel();
+    public JButton aNumbers[] = new JButton[10];
+    public JButton aSigns[] = new JButton[6];
+    public JButton darkModeButton = new JButton();
+
+    //Private variables
     private JFrame frame = new JFrame("Calculator");
-    private JPanel panel = new JPanel(null);
-    private JPanel panel2 = new JPanel(null);
-    private JLabel labOperation = new JLabel();
-    private JLabel labResult = new JLabel();
-    private JButton aNumbers[] = new JButton[10];
-    private JButton aSigns[] = new JButton[6];
     private String[] operators = {"\\+", "- ", "\\*", "/ ", "= ", "c "};
     private Color c = new Color(hex("0C1332"));
     private ImageIcon btn = new ImageIcon("calculator/src/Images/btn_numbers.png");
     private ImageIcon btn1_pressed = new ImageIcon("calculator/src/Images/btn1_pressed.png");
     private ImageIcon btn_special = new ImageIcon("calculator/src/Images/btn1.png");
-    private ImageIcon btn_number_dark = new ImageIcon("calculator/src/Images/background_number_dark.png");
-    private ImageIcon btn_number_dark_pressed = new ImageIcon("calculator/src/Images/background_dark_number_pressed.png");
-    private ImageIcon btn_special_dark = new ImageIcon("calculator/src/Images/background_special_dark.png");
-    private ImageIcon btn_special_dark_pressed = new ImageIcon("calculator/src/Images/background_special_dark_pressed.png");
     private int x = 7;
     private int y = 140;
-    int width = 50;
-    int height = 50;
-    private JButton darkModeButton = new JButton();
+    private int width = 50;
+    private int height = 50;
     private Border margin = new EmptyBorder(5, 15, 5, 15);
     private Color numberColor = new Color(hex("4F4E4E"));
-    private Color numberColorDark = new Color(hex("D8D8DA"));
     private int count;
     private JButton closeButton = new JButton();
     private JButton minimizeButton = new JButton();
