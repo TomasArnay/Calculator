@@ -39,48 +39,48 @@ public class Calculator implements ActionListener{
 
         setPanel();
     }
-
+    
     public void setPanel() {
         Color colorFrame = new Color(hex("D1F7F5"));
         Color colorFrame2 = new Color(hex("ffffff"));
-
+        
         panel.setBackground(colorFrame);
         panel2.setBackground(colorFrame2);
-
+        
         panel.add(closeButton);
         panel.add(minimizeButton);
         panel.add(labOperation);
         panel.add(labResult);
         panel.add(darkModeButton);
         panel.add(dragged);
-
+        
         panel.setBounds(0, 0, 320, 120);
         panel2.setBounds(0, 120, 320, 330);
-
+        
         operationButtons();
         setLabels();
         setDarkMode();
         createButtons();
         assignValue();
     }
-
+    
     public void operationButtons() {
         closeButton.setBounds(300, 5, 15, 15);
         minimizeButton.setBounds(280, 5, 15, 15);
-
+        
         closeButton.setBackground(Color.red);
         minimizeButton.setBackground(Color.ORANGE);
-
+        
         closeButton.setBorder(null);
         minimizeButton.setBorder(null);
-
+        
         closeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
             }
         });
-
+        
         minimizeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -88,41 +88,41 @@ public class Calculator implements ActionListener{
             }
         });
     }
-
+    
     public void setLabels() {
         // Size of labels
         labOperation.setBounds(0, 40, 315, 20);
         labResult.setBounds(0, 80, 315, 30);
         dragged.setBounds(0, 0, 320, 120);
-
+        
         // Text of labels
         labOperation.setFont(new Font("Arial", Font.PLAIN, 25));
         labOperation.setHorizontalAlignment(SwingConstants.RIGHT);
-
+        
         labResult.setFont(new Font("Arial", Font.PLAIN, 40));
         labResult.setHorizontalAlignment(SwingConstants.RIGHT);
-
+        
         // Font color of label
         labOperation.setForeground(c);
         labResult.setForeground(c);
-
+        
         dragged.addMouseListener(new MouseListener() {
-
+            
             @Override
             public void mouseClicked(MouseEvent e) {}
-
+            
             @Override
             public void mousePressed(MouseEvent e) {
                 xDragged = e.getX();
                 yDragged = e.getY();
             }
-
+            
             @Override
             public void mouseReleased(MouseEvent e) {}
-
+            
             @Override
             public void mouseEntered(MouseEvent e) {}
-
+            
             @Override
             public void mouseExited(MouseEvent e) {}
         });
@@ -159,7 +159,7 @@ public class Calculator implements ActionListener{
             aNumbers[i].setFont(new Font("Arial Narrow Bold", Font.PLAIN, 30));
             aNumbers[i].setHorizontalTextPosition(SwingConstants.CENTER);
             aNumbers[i].setBorder(margin);
-            aNumbers[i].setIcon(btn1);
+            aNumbers[i].setIcon(btn);
             aNumbers[i].setRolloverIcon(btn1_pressed);
             aNumbers[i].setText(number);
             aNumbers[i].setForeground(numberColor);
@@ -354,7 +354,7 @@ public class Calculator implements ActionListener{
     
     public void darkTheme(){
         if(count % 2 != 0){
-            ImageIcon theme_button_dark = new ImageIcon("src/Images/theme_button.png");
+            ImageIcon theme_button_dark = new ImageIcon("calculator/src/Images/theme_button.png");
             Color panelDark = new Color(hex("212b41"));
             Color panelDark2 = new Color(hex("2e3951"));
             Color color_dark_button = new Color(hex("ffffff"));
@@ -397,13 +397,13 @@ public class Calculator implements ActionListener{
     private JButton aSigns[] = new JButton[6];
     private String[] operators = {"\\+", "- ", "\\*", "/ ", "= ", "c "};
     private Color c = new Color(hex("0C1332"));
-    private ImageIcon btn1 = new ImageIcon("src/Images/btn_numbers.png");
-    private ImageIcon btn1_pressed = new ImageIcon("src/Images/btn1_pressed.png");
-    private ImageIcon btn_special = new ImageIcon("src/Images/btn1.png");
-    private ImageIcon btn_number_dark = new ImageIcon("src/Images/background_number_dark.png");
-    private ImageIcon btn_number_dark_pressed = new ImageIcon("src/Images/background_dark_number_pressed.png");
-    private ImageIcon btn_special_dark = new ImageIcon("src/Images/background_special_dark.png");
-    private ImageIcon btn_special_dark_pressed = new ImageIcon("src/Images/background_special_dark_pressed.png");
+    private ImageIcon btn = new ImageIcon("calculator/src/Images/btn_numbers.png");
+    private ImageIcon btn1_pressed = new ImageIcon("calculator/src/Images/btn1_pressed.png");
+    private ImageIcon btn_special = new ImageIcon("calculator/src/Images/btn1.png");
+    private ImageIcon btn_number_dark = new ImageIcon("calculator/src/Images/background_number_dark.png");
+    private ImageIcon btn_number_dark_pressed = new ImageIcon("calculator/src/Images/background_dark_number_pressed.png");
+    private ImageIcon btn_special_dark = new ImageIcon("calculator/src/Images/background_special_dark.png");
+    private ImageIcon btn_special_dark_pressed = new ImageIcon("calculator/src/Images/background_special_dark_pressed.png");
     private int x = 7;
     private int y = 140;
     int width = 50;
